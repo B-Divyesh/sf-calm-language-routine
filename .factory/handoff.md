@@ -6,6 +6,8 @@
 - Verification date: 2026-09-05 UTC
 - Implementation and deployed artifact SHA:
   `2c9f25462b7c529b118fc499cf2f70edeac44bac`
+- Handoff documentation body SHA:
+  `dbd605b0a34e3c96ea979f385d9fc311edc9be33`
 - Previous failed candidate: `e55d560c8361fb12bcd649eb707ccde2ca21b473`
 - Previous independent report commit:
   `91d4387a2231714eda89e19dcde7e1f942816305`
