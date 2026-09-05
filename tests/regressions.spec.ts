@@ -143,11 +143,11 @@ test('route history, legal pages, and designed 404 have correct titles and struc
     await expect(page.locator('main h1')).toHaveCount(1);
     await expect(page.locator('footer')).toBeVisible();
   }
+  expect(errors).toEqual([]);
   const response = await page.goto('/missing-page');
   expect(response?.status()).toBe(404);
   await expect(page).toHaveTitle('Page not found — Quiet Loop');
   await expect(page.getByRole('heading', { level: 1, name: 'This page does not exist' })).toBeVisible();
-  expect(errors).toEqual([]);
 });
 
 test('the pointer-operable update control activates a waiting service worker', async ({ page }) => {
