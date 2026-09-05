@@ -143,7 +143,7 @@ test('@claim:paid-reflections a valid restored license enables weekly reflection
   let verifyRequests = 0;
   await page.route('https://api.sociobot.in/api/v1/products/calm-language-routine/verify?*', async (route) => {
     verifyRequests += 1;
-    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ valid: true, reason: 'ok', expires_at: null }) });
+    await route.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ valid: true, reason: 'ok', expires_at: null }) });
   });
   await page.goto('/shelf');
   await expect(page.getByText('One-time purchase · $12 USD')).toBeVisible();

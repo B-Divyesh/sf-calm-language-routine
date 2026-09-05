@@ -73,6 +73,7 @@ test('an invalid license never grants weekly reflections', async ({ page }) => {
   await page.route('https://api.sociobot.in/api/v1/products/calm-language-routine/verify?*', (route) => route.fulfill({
     status: 200,
     contentType: 'application/json',
+    headers: { 'Access-Control-Allow-Origin': '*' },
     body: JSON.stringify({ valid: false, reason: 'invalid', expires_at: null })
   }));
   await page.goto('/shelf');
