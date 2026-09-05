@@ -152,18 +152,30 @@ test('route history, legal pages, and designed 404 have correct titles and struc
 });
 
 test('the pointer-operable update control activates a waiting service worker', async ({ page }) => {
+  const liveUpdateCheck = process.env.QUIET_LOOP_LIVE_UPDATE === '1';
+  test.skip(Boolean(process.env.QUIET_LOOP_URL) && !liveUpdateCheck, 'A live update check requires a deployment during this test.');
+  test.setTimeout(liveUpdateCheck ? 180_000 : 30_000);
   await page.goto('/', { waitUntil: 'networkidle' });
   await page.evaluate(() => navigator.serviceWorker.ready);
   if (!await page.evaluate(() => Boolean(navigator.serviceWorker.controller))) await page.reload({ waitUntil: 'networkidle' });
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
-  await page.evaluate(async () => {
-    await fetch('/__test/service-worker-update', { method: 'POST' });
-    const registration = await navigator.serviceWorker.ready;
-    await registration.update();
-  });
+  if (liveUpdateCheck) {
+    await expect.poll(async () => page.evaluate(async () => {
+      const registration = await navigator.serviceWorker.ready;
+      await registration.update();
+      return Boolean(registration.waiting);
+    }), { timeout: 170_000, intervals: [3_000] }).toBe(true);
+  } else {
+    await page.evaluate(async () => {
+      await fetch('/__test/service-worker-update', { method: 'POST' });
+      const registration = await navigator.serviceWorker.ready;
+      await registration.update();
+    });
+  }
   const update = page.getByRole('button', { name: 'Update available. Reload now' });
   await expect(update).toBeVisible();
   await expect(update).toHaveCSS('pointer-events', 'auto');
   await Promise.all([page.waitForEvent('load'), update.click()]);
-  await expect.poll(() => page.evaluate(async () => (await caches.keys()).some((key) => key.includes('test-1')))).toBe(true);
+  if (liveUpdateCheck) await expect(page.locator('main h1')).toBeVisible();
+  else await expect.poll(() => page.evaluate(async () => (await caches.keys()).some((key) => key.includes('test-1')))).toBe(true);
 });

@@ -1,4 +1,4 @@
-const VERSION = 'quiet-loop-v2';
+const VERSION = 'quiet-loop-v3';
 const SHELL = [
   '/',
   '/index.html',
