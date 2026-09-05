@@ -1,0 +1,65 @@
+[
+  {
+    "id": "demo-sandbox",
+    "claim": "Sample data opens in one click and cannot change real cards",
+    "where": "landing first action, demo banner, README",
+    "test": "npm run test:claims -- --grep @claim:demo-sandbox",
+    "sandbox": "fresh browser; enter demo, change and reset sample data, leave demo, assert the real database remains empty"
+  },
+  {
+    "id": "bounded-daily-set",
+    "claim": "A daily review uses the chosen 1–20 card limit and does not grow after it starts",
+    "where": "landing how-it-works, Daily limit route, README",
+    "test": "npm run test:claims -- --grep @claim:bounded-daily-set",
+    "sandbox": "fresh browser; set limit to two, add due cards, start review, add another card, assert session remains two"
+  },
+  {
+    "id": "device-local",
+    "claim": "Study data stays in this browser and the free core makes no third-party requests",
+    "where": "landing facts, About, Privacy, README",
+    "test": "npm run test:claims -- --grep @claim:device-local",
+    "sandbox": "fresh browser; add a card, reload, assert persistence, and record all requests during the core flow"
+  },
+  {
+    "id": "offline-reload",
+    "claim": "Works offline after the first visit",
+    "where": "landing facts, Privacy, README",
+    "test": "npm run test:claims -- --grep @claim:offline-reload",
+    "sandbox": "dedicated fresh browser context; load and control the demo, set the context offline, reload, and assert sample data and offline status"
+  },
+  {
+    "id": "csv-export",
+    "claim": "Exports all cards as CSV",
+    "where": "Cards, About, Terms, README",
+    "test": "npm run test:claims -- --grep @claim:csv-export",
+    "sandbox": "fresh demo; download CSV and assert its header, row count, prompt, and answer"
+  },
+  {
+    "id": "json-backup",
+    "claim": "Exports and imports cards, settings, review state, and reflections as JSON",
+    "where": "About, Privacy, README",
+    "test": "npm run test:claims -- --grep @claim:json-backup",
+    "sandbox": "fresh demo; export JSON, assert each data class, delete demo data, import the export, and assert all cards return"
+  },
+  {
+    "id": "archive-restore",
+    "claim": "Archives a card with a reason and can restore it later",
+    "where": "landing how-it-works, Cards, README",
+    "test": "npm run test:claims -- --grep @claim:archive-restore",
+    "sandbox": "fresh demo; prove missing reason recovery, archive with a reason, restore, and assert the card is active"
+  },
+  {
+    "id": "paid-reflections",
+    "claim": "A $12 USD one-time license adds private weekly reflections, and its valid verdict is reused for one day",
+    "where": "landing pricing, Reflections, Terms, README",
+    "test": "npm run test:claims -- --grep @claim:paid-reflections",
+    "sandbox": "fresh browser with a recorded valid verification response; assert free gating, price, access, reload, and only one verification request"
+  },
+  {
+    "id": "no-engagement-mechanics",
+    "claim": "Review has no streak, feed, push notification, or extra cards after completion",
+    "where": "landing privacy and limits, Daily limit, README",
+    "test": "npm run test:claims -- --grep @claim:no-engagement-mechanics",
+    "sandbox": "fresh browser with notification and push calls instrumented; complete a one-card review and assert no calls, controls, streak headings, or extra card"
+  }
+]

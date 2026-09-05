@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://calm-language-routine.sociobot.in/sitemap.xml

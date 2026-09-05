@@ -1,43 +1,65 @@
 # Quiet Loop
 
-Quiet Loop is a calm, local-first language review ritual for adults who want a
-sustainable ten-minute practice without streaks, feeds, notifications, or an
-endless queue. It is a static PWA: cards, daily sessions, archive reasons, and
-optional reflections stay in the browser by default.
+Quiet Loop gives adult language learners one fixed daily review. It avoids
+streaks, feeds, push notifications, and an endless queue.
+
+Try the isolated sample at
+[calm-language-routine.sociobot.in/demo](https://calm-language-routine.sociobot.in/demo).
+The demo contains five realistic cards and never reads or changes real cards.
 
 ## What it does
 
-- Creates one bounded daily set from cards due today.
-- Lets a learner reveal an answer, keep a card for tomorrow, let it return
-  later in the same small set, or archive it with a reason.
-- Supports optional weekly planning, dark/light/system appearance, CSV export,
-  full JSON backup/import, and device-local deletion.
-- Works offline after the first successful load.
-- Offers an optional $12 one-time Quiet Shelf unlock for private weekly
-  reflections. The core practice and all data-export controls stay free.
+- Uses a chosen daily limit from 1 to 20 cards. A started review does not grow.
+- Archives a card with a reason and restores it later.
+- Exports all cards as CSV.
+- Exports and imports cards, settings, review state, and reflections as JSON.
+- Stores study data in browser IndexedDB and makes no third-party request in
+  the free core.
+- Works offline after the first successful visit.
 
-## Run locally
+The optional weekly reflections feature costs $12 USD once. Review, archiving,
+CSV export, JSON backup, and deletion remain free.
 
-Requires Node 20+ and npm.
+## Run and verify
+
+Requires Node 20 or newer and npm. From a clean checkout:
 
 ```sh
-npm install
+npm ci
+npm test
+npm run build
+npm run test:claims
+npm run test:e2e
+```
+
+`npm run build` creates the deployable static site in `dist/`. Playwright
+1.58.2 is pinned. If its Chromium binary is not already available, run
+`npx playwright install chromium` once.
+
+For local development:
+
+```sh
 npm run dev
 ```
 
-Open the URL Vite prints. Use `npm test` for the unit tests and `npm run build`
-for a production build. The deployable static output is `dist/`, with
-`dist/index.html` at its root.
+For a production preview:
+
+```sh
+npm run preview -- --host 127.0.0.1 --port 4173
+```
 
 ## Privacy and deployment
 
-No third-party fonts, tracking scripts, or analytics are loaded. Browser
-IndexedDB holds study data; license tokens, when supplied, are kept in local
-storage and checked against Sociobot’s license endpoint at most daily.
+Real data uses IndexedDB database `quiet-loop`. Demo data uses the separate
+`demo:quiet-loop` database. License tokens use namespaced local storage and go
+only to Sociobot for validation at most once daily.
 
-Deploy the contents of `dist/` as a static site with SPA fallback to
-`index.html`. `/privacy/` and `/terms/` are physical static pages. The service
-worker caches the app shell for offline use.
+Deploy the contents of `dist/` as a static site. The included Static Web Apps
+configuration defines deep links, a designed 404, security headers, manifest
+MIME type, and immutable caching for hashed assets.
+
+See [Privacy](https://calm-language-routine.sociobot.in/privacy/) and
+[Terms](https://calm-language-routine.sociobot.in/terms/).
 
 ## License
 

@@ -34,5 +34,13 @@ export interface Reflection {
   createdAt: string;
 }
 
+export interface Backup {
+  version: 1;
+  cards: Card[];
+  settings: Settings;
+  reflections: Reflection[];
+  sessions: Session[];
+}
+
 export const today = () => new Date().toISOString().slice(0, 10);
 export const uid = () => crypto.randomUUID();

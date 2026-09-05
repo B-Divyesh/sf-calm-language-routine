@@ -14,16 +14,23 @@ physical logic without borrowing the anxious language of games.
 | `--surface` | `#FFFDF7` | lifted sheets |
 | `--ink` | `#20362F` | primary text, 11.7:1 on paper |
 | `--muted` | `#53665E` | secondary text, 5.4:1 on paper |
-| `--moss` | `#286450` | quiet primary action |
-| `--moss-dark` | `#184737` | pressed / dark-mode action |
+| `--accent` | `#286450` | light-mode links and labels |
+| `--action` | `#286450` | light-mode primary action |
+| `--action-text` | `#FFFDF7` | light-mode action text |
 | `--pollen` | `#E8B85A` | small highlights / planning mark |
-| `--clay` | `#A84E3F` | archive / destructive actions |
+| `--danger` | `#8F382D` | light-mode archive / destructive actions |
 | `--night` | `#14251F` | dark-mode paper field |
 | `--night-surface` | `#20352D` | dark-mode sheet |
+| dark `--action` | `#A7DABC` | dark-mode primary action |
+| dark `--action-text` | `#14251F` | dark-mode action text |
+| dark `--danger` | `#FFAD9E` | dark-mode archive action |
 
 The dark treatment keeps the same cut-paper depth with forest-black paper,
 cream ink, and desaturated moss; it is intentionally a night desk, not a
 separate product skin.
+
+Action colors use separate foreground and background tokens in each theme.
+This keeps text contrast above 4.5:1 in normal and hover states.
 
 ## Type and rhythm
 
@@ -70,3 +77,9 @@ Generated via `/opt/fleet/lib/gen-image.sh` using the factory image deployment
 on 2026-08-28, reviewed for text artifacts and brand marks, then converted to
 WebP. Generated imagery is original to Quiet Loop; disclosure appears in the
 footer.
+
+On 2026-09-05, the original source was reviewed again at full resolution. It
+has no text artifacts, people, brands, or unintended symbols. `og-image.jpg`
+is a 1200×630 crop-and-extend derivative of that source. `apple-touch-icon.png`
+is a resized derivative of the existing original icon. No new generated asset
+or external source was introduced.

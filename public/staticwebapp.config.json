@@ -1,0 +1,42 @@
+{
+  "routes": [
+    {
+      "route": "/assets/*",
+      "headers": { "Cache-Control": "public, max-age=31536000, immutable" }
+    },
+    {
+      "route": "/quiet-desk-garden.webp",
+      "headers": { "Cache-Control": "public, max-age=31536000, immutable" }
+    },
+    {
+      "route": "/og-image.jpg",
+      "headers": { "Cache-Control": "public, max-age=31536000, immutable" }
+    },
+    {
+      "route": "/sw.js",
+      "headers": { "Cache-Control": "no-cache" }
+    },
+    {
+      "route": "/manifest.webmanifest",
+      "headers": { "Cache-Control": "public, max-age=3600", "Content-Type": "application/manifest+json; charset=utf-8" }
+    },
+    { "route": "/demo", "rewrite": "/index.html" },
+    { "route": "/cards", "rewrite": "/index.html" },
+    { "route": "/plan", "rewrite": "/index.html" },
+    { "route": "/shelf", "rewrite": "/index.html" },
+    { "route": "/about", "rewrite": "/index.html" }
+  ],
+  "responseOverrides": {
+    "404": { "rewrite": "/404.html" }
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.sociobot.in; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY"
+  },
+  "mimeTypes": {
+    ".webmanifest": "application/manifest+json"
+  }
+}

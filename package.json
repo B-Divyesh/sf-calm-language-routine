@@ -1,22 +1,24 @@
 {
   "name": "calm-language-routine",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest run",
-    "test:e2e": "node scripts/smoke.mjs",
+    "test:e2e": "npm run build --silent && playwright test",
+    "test:claims": "npm run build --silent && playwright test tests/claims.spec.ts",
     "test:watch": "vitest",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@playwright/test": "1.58.2",
     "@types/node": "^22.10.2",
     "axe-core": "^4.11.0",
-    "playwright": "^1.58.2",
+    "playwright": "1.58.2",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
-    "vitest": "^2.1.8"
+    "vitest": "5.0.0"
   }
 }

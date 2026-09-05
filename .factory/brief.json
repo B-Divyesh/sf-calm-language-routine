@@ -1,0 +1,30 @@
+{
+  "slug": "calm-language-routine",
+  "title": "Quiet Loop",
+  "territory": "utilities",
+  "user": "Adult language learners who want a sustainable 10-minute review habit without streaks, feeds, or punitive notifications.",
+  "evidence": [
+    {
+      "url": "https://hn.algolia.com/api/v1/items/46276019",
+      "date": "2025-12-15",
+      "quote_or_summary": "A solo language-app maker asks whether deliberately avoiding gamification, streaks, subscriptions, and engagement tricks is commercially viable; the thread contains 67 comments."
+    },
+    {
+      "url": "https://github.com/st3v3nmw/obsidian-spaced-repetition/issues/1608",
+      "date": "2026-07-25",
+      "quote_or_summary": "A reviewer asks for an Archive action because a card can stop being useful while the source note remains valuable."
+    }
+  ],
+  "recurrence": "Two separate 2025–26 learning-tool communities identify the same retention risk: engagement mechanics and endless review queues make a tool less useful, not more. The HN discussion is substantial (67 comments).",
+  "current_workaround": "Use Duolingo/Anki despite unwanted mechanics, turn off notifications, or abandon stale cards manually.",
+  "incumbents_and_gap": "Duolingo optimizes habit loops and Anki optimizes scheduling; neither makes a calm, finite daily routine with first-class card retirement its main product promise.",
+  "smallest_useful_product": "A local-first PWA with one bounded daily set, optional weekly planning, a one-tap archive-with-reason action, and exportable CSV. Non-goals: a language course, social feed, generated lessons, or streaks.",
+  "success_measure": "In a 30-day pilot, 50% of activated users complete at least 12 sessions without enabling a streak or push notification, and 30% archive or revise an obsolete item.",
+  "artifact_class": "pwa-offline",
+  "monetization": "one-time — the audience explicitly values an unpressured, subscription-free learning environment.",
+  "constraints": "Store learning data on device by default; provide export/delete; do not imply pedagogical outcomes; accessibility must include keyboard-only review.",
+  "est_build_effort": "S",
+  "why_distinct": "It is a deliberately finite review ritual and content-retirement tool, rather than another gamified language app or an Anki clone.",
+  "confidence": 4,
+  "state": "RESEARCHED"
+}
