@@ -57,7 +57,7 @@ createServer(async (request, response) => {
 
   if (url.pathname === '/sw.js') {
     const source = await readFile(join(root, 'sw.js'), 'utf8');
-    const revised = source.replace('quiet-loop-v3', `quiet-loop-v3-test-${serviceWorkerRevision}`);
+    const revised = source.replace('quiet-loop-v4', `quiet-loop-v4-test-${serviceWorkerRevision}`);
     send(response, 200, revised, { 'Content-Type': types['.js'], 'Cache-Control': 'no-cache' });
     return;
   }

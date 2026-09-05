@@ -1,4 +1,4 @@
-const VERSION = 'quiet-loop-v3';
+const VERSION = 'quiet-loop-v4';
 const SHELL = [
   '/',
   '/index.html',
@@ -33,16 +33,18 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== location.origin) return;
 
   if (event.request.mode === 'navigate') {
+    const path = url.pathname.replace(/\/$/, '') || '/';
+    const isAppRoute = ['/', '/demo', '/cards', '/plan', '/shelf', '/about'].includes(path);
     event.respondWith(
       fetch(event.request)
         .then((response) => {
           if (response.ok) {
             const copy = response.clone();
-            caches.open(VERSION).then((cache) => cache.put('/index.html', copy));
+            caches.open(VERSION).then((cache) => cache.put(isAppRoute ? '/index.html' : event.request, copy));
           }
           return response;
         })
-        .catch(() => caches.match('/index.html').then((cached) => cached || caches.match('/offline.html')))
+        .catch(() => caches.match(isAppRoute ? '/index.html' : event.request).then((cached) => cached || caches.match('/offline.html')))
     );
     return;
   }

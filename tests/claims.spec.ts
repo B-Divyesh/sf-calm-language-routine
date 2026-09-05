@@ -74,8 +74,9 @@ test('@claim:offline-reload cached demo reloads in its own browser context', asy
   await page.evaluate(() => navigator.serviceWorker.ready);
   if (!await page.evaluate(() => Boolean(navigator.serviceWorker.controller))) await page.reload({ waitUntil: 'networkidle' });
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+  await page.goto('/privacy/', { waitUntil: 'networkidle' });
   await context.setOffline(true);
-  await page.reload({ waitUntil: 'domcontentloaded' });
+  await page.goto('/demo', { waitUntil: 'domcontentloaded' });
   await expect(page.getByText('Demo — sample data, nothing is saved')).toBeVisible();
   await expect(page.getByText('How do I ask for the bill?')).toBeVisible();
   await expect(page.getByText('You are offline. Saved cards are still available.')).toBeVisible();
